@@ -1,9 +1,9 @@
-import { Image, ImageBackground, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Image, ImageBackground, KeyboardAvoidingView, Platform, StatusBar, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { Entypo, Feather, FontAwesome, FontAwesome5, FontAwesome6, Fontisto } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
+//import { StatusBar } from 'expo-status-bar';
 export default function signup() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState('');
@@ -11,8 +11,11 @@ export default function signup() {
   const [phone, setphone] = useState('');
   const router=useRouter()
   return (
-    <SafeAreaView style={styles.container}>
-      <View>
+    <KeyboardAvoidingView
+    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    style={styles.container} >
+      <StatusBar backgroundColor='#FFFFFF' />
+      <View >
         <Image source={require('../../assets/topVector.png')} style={styles.top}/>
       </View>
       <View>
@@ -33,6 +36,7 @@ export default function signup() {
       <TextInput style={styles.input}
       value={email} onChangeText={setemail} placeholder='Email'/>
       </View>
+
       <View style={styles.passwordcontainer}>
       <Feather name="phone" size={24} color="#9a9a9a" style={styles.emailicon} />
       <TextInput style={styles.input}
@@ -55,7 +59,7 @@ export default function signup() {
      <View style={styles.bottomimagecontainer}>
      <ImageBackground source={require('../../assets/Vector2.png')} style={styles.backgroundimage}/>
       </View>
-    </SafeAreaView>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -64,6 +68,7 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#F5F5F5',
       position:'relative',
+      //paddingTop:StatusBar.currentHeight,
     },
     socialcontainer:{
       flexDirection:'row',
@@ -154,7 +159,7 @@ const styles = StyleSheet.create({
     },
     top:{
         width:"100%",
-        height:119,
+        height:120,
         left:-1
     },
     hellotext:{
